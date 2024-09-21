@@ -1,11 +1,12 @@
 use starknet::ContractAddress;
 use starknet::syscalls::deploy_syscall;
-
-
+use FactRegistry::{DEFAULT_RANGE, PITCH_LAKE_V1};
+use FactRegistry::{JobRequest, JobRequestParams};
 use fossil::fact_registry::contract::{
     FactRegistry, IFactRegistryDispatcher, IFactRegistryDispatcherTrait
 };
-use FactRegistry::{JobRequest, JobRequestParams, DEFAULT_RANGE, PITCH_LAKE_V1};
+
+/// Helpers ///
 
 fn deploy_contract() -> IFactRegistryDispatcher {
     let (contract_address, _): (ContractAddress, Span<felt252>) = deploy_syscall(
@@ -15,7 +16,6 @@ fn deploy_contract() -> IFactRegistryDispatcher {
 
     return IFactRegistryDispatcher { contract_address };
 }
-
 
 fn resolve_data(data: Span<felt252>) -> (u256, u128, u256) {
     let twap: u256 = u256 {
@@ -29,7 +29,6 @@ fn resolve_data(data: Span<felt252>) -> (u256, u128, u256) {
     (twap, volatility, reserve_price)
 }
 
-
 fn get_mock_request() -> JobRequest {
     JobRequest {
         identifiers: array![PITCH_LAKE_V1].span(),
@@ -39,6 +38,7 @@ fn get_mock_request() -> JobRequest {
     }
 }
 
+/// Tests ///
 
 #[test]
 #[available_gas(12_500_000)]

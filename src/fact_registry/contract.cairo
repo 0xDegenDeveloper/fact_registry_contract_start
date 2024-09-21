@@ -6,7 +6,6 @@ pub trait IFactRegistry<TContractState> {
     ) -> felt252;
 }
 
-
 #[starknet::contract]
 pub mod FactRegistry {
     use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess,};
@@ -17,7 +16,6 @@ pub mod FactRegistry {
     pub const PITCH_LAKE_V1: felt252 = selector!("PITCH_LAKE_V1");
     pub const DEFAULT_RANGE: (u64, u64) = (123, 456);
     const FACT_SIZE: usize = 5; // (u256, u128, u256)
-
 
     #[derive(Copy, Destruct, Serde)]
     pub struct JobRequest {
@@ -74,6 +72,8 @@ pub mod FactRegistry {
         fn set_fact(
             ref self: ContractState, job_request: JobRequest, job_data: Span<felt252>
         ) -> felt252 {
+            /// Proving would happen first ... ///
+
             let job_id = self.make_job_id(job_request);
 
             for i in 0..FACT_SIZE {
