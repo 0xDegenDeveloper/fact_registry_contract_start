@@ -1,9 +1,8 @@
-use FactRegistry::JobRequest;
 #[starknet::interface]
 pub trait IFactRegistry<TContractState> {
     fn get_fact(self: @TContractState, job_id: felt252) -> Span<felt252>;
     fn set_fact(
-        ref self: TContractState, job_request: JobRequest, job_data: Span<felt252>
+        ref self: TContractState, job_request: FactRegistry::JobRequest, job_data: Span<felt252>
     ) -> felt252;
 }
 
