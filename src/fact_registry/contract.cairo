@@ -14,9 +14,9 @@ pub mod FactRegistry {
     use core::poseidon::poseidon_hash_span;
     use super::IFactRegistry;
 
-    const FACT_SIZE: usize = 5; // (u256, u128, u256)
-    pub const DEFAULT_RANGE: (u64, u64) = (123, 456);
     pub const PITCH_LAKE_V1: felt252 = selector!("PITCH_LAKE_V1");
+    pub const DEFAULT_RANGE: (u64, u64) = (123, 456);
+    const FACT_SIZE: usize = 5; // (u256, u128, u256)
 
 
     #[derive(Copy, Destruct, Serde)]
