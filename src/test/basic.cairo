@@ -1,6 +1,5 @@
 use starknet::ContractAddress;
 use starknet::syscalls::deploy_syscall;
-use FactRegistry::{DEFAULT_RANGE, PITCH_LAKE_V1};
 use FactRegistry::{JobRequest, JobRequestParams};
 use fossil::fact_registry::contract::{
     FactRegistry, IFactRegistryDispatcher, IFactRegistryDispatcherTrait
@@ -30,6 +29,9 @@ fn resolve_data(data: Span<felt252>) -> (u256, u128, u256) {
 }
 
 fn get_mock_request() -> JobRequest {
+    let PITCH_LAKE_V1: felt252 = selector!("PITCH_LAKE_V1");
+    let DEFAULT_RANGE: (u64, u64) = (123, 456);
+
     JobRequest {
         identifiers: array![PITCH_LAKE_V1].span(),
         params: JobRequestParams {
